@@ -1,0 +1,35 @@
+{
+  "notion_version": "2022-06-28",
+  "positions_database_id": "9ffb6d03ea5c46a1be4246ec09278392",
+  "contacts_database_id": "40b018938e7c4f16a4aa60f4f2bf8177",
+
+  "_comment_ownership": "Columns the FILE owns are the only ones `push` will ever write to Notion. Everything else is Notion-owned: pulled into the CSV as a backup, never pushed. This is what makes Notion edits and the daily scan safe from being overwritten.",
+  "file_owned_columns": [
+    "position_id",
+    "Firm",
+    "Position",
+    "Category",
+    "Location",
+    "Type",
+    "Priority"
+  ],
+
+  "_comment_public": "Whitelist for the public page. Anything NOT listed here can never appear on it. Priority, Notes, Referral, CV Version, Applied On, Next Step, Profile Fit and Contacts are deliberately absent.",
+  "public_columns": [
+    "Firm",
+    "Position",
+    "Category",
+    "Location",
+    "Type",
+    "Deadline",
+    "Eligibility",
+    "Visa Sponsorship",
+    "Application Requirements",
+    "Info",
+    "Test Prep",
+    "Portal Link"
+  ],
+  "public_exclude_notes_prefix": "NO EU EARLY-CAREERS ROUTE FOUND",
+  "site_title": "European Quant & Markets Internships 2027",
+  "site_subtitle": "Summer internships and graduate programmes in trading, quant research, structuring and commodities across Europe. Refreshed nightly."
+}
