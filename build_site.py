@@ -125,13 +125,12 @@ function render() {{
   let rows = DATA.filter(r =>
     (!fo || r["Open?"]===fo) && (!fc || r["Category"]===fc) && (!fl || r["Location"]===fl) && (!fv || r["Visa Sponsorship"]===fv) &&
     (!q || Object.values(r).join(" ").toLowerCase().includes(q)));
-    const RANK = {"Open":0, "Not yet open":1, "Closed":2};
-    const RANK = {{"Open":0, "Not yet open":1, "Closed":2}};
+  const RANK = {{"Open":0, "Not yet open":1, "Closed":2}};
   rows.sort((a,b)=>{{
     let x=a[sortKey]||"", y=b[sortKey]||"";
     if (sortKey==="Open?") {{ x=RANK[x]??9; y=RANK[y]??9; if (x===y) {{ x=a["Deadline"]||"9999"; y=b["Deadline"]||"9999"; }} }}
     return (x<y?-1:x>y?1:0)*(asc?1:-1);
-  }}); return (x<y?-1:x>y?1:0)*(asc?1:-1); }});
+  }});
   $("t").querySelector("tbody").innerHTML = rows.map(r =>
     "<tr>"+COLS.map(k=>`<td class="${{k==="Info"?"info":k==="Test Prep"?"prep":""}}">${{cell(k, r[k]||"")}}</td>`).join("")+"</tr>").join("");
   $("n").textContent = rows.length;
