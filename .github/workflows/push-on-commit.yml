@@ -1,0 +1,30 @@
+name: Push CSV identity columns to Notion
+
+on:
+  push:
+    branches: [main]
+    paths: ["positions.csv"]
+
+jobs:
+  push:
+    # Skip when the commit came from the nightly bot; that commit is Notion -> CSV, nothing to push back.
+    if: github.actor != 'tracker-bot' && !contains(github.event.head_commit.message, 'nightly pull')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Push file-owned columns -> Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: python sync_notion.py push
+      - name: Commit back any new position_ids
+        run: |
+          git config user.name "tracker-bot"
+          git config user.email "tracker-bot@users.noreply.github.com"
+          git add positions.csv
+          git diff --cached --quiet || (git commit -m "assign position_ids after push" && git push)
